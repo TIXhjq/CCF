@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/yolov3/keras-yolo3-master" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MobileNetV3-master" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/TF" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/TF/slim" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/TF/tf_project_test/5-1" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/kaggle_competitions/Santander_Customer_Transaction_Prediction" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/kaggle_competitions/Santander_Customer_Transaction_Prediction/data" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hand/YOLO-LITE-keras/yolo3" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hand/YOLO-LITE/yolo3" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/YOLO-LITE-keras" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/YOLO-LITE-keras/yolo3" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hand/keras-yolo3-master" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hand/keras-yolo3-master/yolo3" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hand/YOLO-LITE-keras/egohand" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/keras-yolo3-master/yolo3" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/keras-yolo3-master" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jingwei/model" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/jingwei/unet" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/unet" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/embedding" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/embedding/setence_model" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GraphEmbedding/ge/models" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GraphEmbedding" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GraphEmbedding/ge" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/embedding/util" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="PackageRequirementsSettings">
+    <option name="requirementsPath" value="" />
+  </component>
+  <component name="TestRunnerService">
+    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
+  </component>
+</module>
