@@ -24,6 +24,7 @@ class DeepWalk(core_model):
         embeddings=self.embdding_train(sentence_list)
         return embeddings
 
+
 if __name__=='__main__':
     Graph = read_graph('../wiki/Wiki_edgelist.txt')
 

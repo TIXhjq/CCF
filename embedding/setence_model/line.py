@@ -183,10 +183,9 @@ class Line(core_model):
         self.get_embedding()
         return self.embeddings
 
+
 if __name__=='__main__':
     from util import read_graph
-    import os
-    print(os.getcwd())
     Graph=read_graph('../wiki/Wiki_edgelist.txt')
     line=Line(
         Graph=Graph,

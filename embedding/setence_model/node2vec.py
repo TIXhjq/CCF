@@ -28,6 +28,9 @@ class node2vec(core_model):
 
         return embeddings
 
+
+
+
 if __name__=='__main__':
     Graph = read_graph('../wiki/Wiki_edgelist.txt')
 
