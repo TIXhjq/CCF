@@ -1,5 +1,6 @@
 # _*_ coding:utf-8 _*_
 from walk_core_model import core_model
+from util_tool import get_node_information
 from numpy import random
 import numpy as np
 import math
@@ -14,20 +15,8 @@ class Line(core_model):
         self.batch_size=batch_size
         self.order=order
         self.negative_ratio=negative_ratio
-        self.get_node_information()
+        self.idx2node,self.node2idx=get_node_information(self.all_nodes)
         self.generate_smapling_table()
-
-    def get_node_information(self):
-        node2idx={}
-        idx2node=[]
-        node_size=0
-        for node in self.all_nodes:
-            node2idx[node]=node_size
-            idx2node.append(node)
-            node_size+=1
-        self.idx2node=idx2node
-        self.node2idx=node2idx
-        return idx2node,node2idx
 
     def generate_edge_sampling_table(self):
         #边采样,防止论文中提到的权重差距大导致梯度爆炸

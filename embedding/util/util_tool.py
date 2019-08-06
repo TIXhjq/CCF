@@ -4,6 +4,19 @@ import networkx as nx
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
+def get_node_information(all_nodes):
+    node2idx = {}
+    idx2node = []
+    node_size = 0
+    for node in all_nodes:
+        node2idx[node] = node_size
+        idx2node.append(node)
+        node_size += 1
+    idx2node = idx2node
+    node2idx = node2idx
+    return idx2node, node2idx
+
 def save_edgelist(edgelist_list,save_path):
     if os.path.exists(save_path):
         os.remove(save_path)
@@ -12,18 +25,7 @@ def save_edgelist(edgelist_list,save_path):
     for edgelist in edgelist_list:
         file.writelines(edgelist)
 
-def get_node_information(all_nodes):
-    node2idx={}
-    idx2node=[]
-    node_size=0
-    for node in all_nodes:
-        node2idx[node]=node_size
-        idx2node.append(node)
-        node_size+=1
-    return idx2node,node2idx
-
-
-def read_graph(edgelist_path):
+def read_graph(edgelist_path='../wiki/Wiki_edgelist.txt'):
     DG=nx.read_edgelist(
         edgelist_path,
         create_using=nx.DiGraph(),
@@ -57,9 +59,9 @@ def read_label(label_path):
     return nodes,label
 
 if __name__=='__main__':
-    # edgelist_list=['1 2\n','4 3\n','5 6\n','2 3\n','2 1\n','3 5\n','1 2\n']
-    # save_path='test.txt'
-    # save_edgelist(edgelist_list,save_path)
-    read_graph('../wiki/Wiki_edgelist.txt')
+    edgelist_list=['1 2\n','4 3\n','5 6\n','2 3\n','2 1\n','3 5\n','1 2\n']
+    save_path='test.txt'
+    save_edgelist(edgelist_list,save_path)
+    read_graph(save_path)
     # read_label(save_path)
 
