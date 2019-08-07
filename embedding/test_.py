@@ -2,6 +2,7 @@
 from deepwalk import DeepWalk
 from line import Line
 from node2vec import node2vec
+from sdne import sdne
 from util_tool import read_graph
 from evaluate import evaluate_tools
 
@@ -61,6 +62,33 @@ def node2vec_run():
     eval_tool = evaluate_tools(embeddings,label_path='wiki/Wiki_labels.txt')
     eval_tool.plot_embeddings()
 
+def sdne_run():
+    Graph = read_graph('wiki/Wiki_edgelist.txt')
+    sden_model = sdne(
+        Graph=Graph,
+        dimension_size=128,
+        per_vertex=100,
+        walk_length=10,
+        window_size=5,
+        work=1,
+        beta=5,
+        alpha=1e-6,
+        verbose=1,
+        epochs=1000,
+        batch_size=512,
+        log_dir='logs/0/',
+        hidden_size_list=[256, 128],
+        l1=1e-5,
+        l2=1e-4
+    )
+    sden_model.train()
+    embeddings = sden_model.get_embeddings()
+
+    from evaluate import evaluate_tools
+    eval_tool = evaluate_tools(embeddings,label_path='wiki/Wiki_labels.txt')
+    eval_tool.plot_embeddings()
+
+
 def test(build_name):
     if build_name=='deepwalk':
         deep_walk_run()
@@ -68,10 +96,13 @@ def test(build_name):
         line_run()
     elif build_name=='node2vec':
         node2vec_run()
+    elif build_name=='sdne':
+        sdne_run()
     elif build_name=='all':
         deep_walk_run()
         line_run()
         node2vec_run()
+        sdne_run()
 
 if __name__=='__main__':
-    test('all')
+    test('sdne')

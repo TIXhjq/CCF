@@ -13,7 +13,6 @@ class evaluate_tools():
             # =read_label(label_path)
 
     def plot_embeddings(self):
-
         emb_list = []
         for k in self.X:
             emb_list.append(self.data[k])
@@ -21,6 +20,7 @@ class evaluate_tools():
 
         model = TSNE(n_components=2)
         node_pos = model.fit_transform(emb_list)
+
 
         color_idx = {}
         for i in range(len(self.X)):

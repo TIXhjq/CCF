@@ -11,6 +11,9 @@ class node2vec(core_model):
         self.p=p
         self.q=q
 
+
+
+
     def Learn_Feature(self):
         self.Preprocess_Modified_Weights(self.p,self.q)
         sentence_list=[]

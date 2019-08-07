@@ -24,10 +24,7 @@
       <sourceFolder url="file://$MODULE_DIR$/embedding" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/embedding/setence_model" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/GraphEmbedding/ge/models" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GraphEmbedding/ge" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/embedding/util" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GraphEmbedding/examples" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GraphEmbedding" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

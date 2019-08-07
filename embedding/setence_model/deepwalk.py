@@ -1,7 +1,6 @@
 # _*_ coding:utf-8 _*_
 from numpy import random
 from walk_core_model import core_model
-from util import read_graph
 from evaluate import evaluate_tools
 
 class DeepWalk(core_model):

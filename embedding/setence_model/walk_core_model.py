@@ -1,13 +1,15 @@
 # _*_ coding:utf-8 _*_
 import tensorflow as tf
-from keras.layers import Embedding,Input,Lambda
+from keras.layers import Embedding,Input,Lambda,Dense
 from keras import backend as K
 from keras.optimizers import Adam
 from keras.callbacks import ReduceLROnPlateau,TensorBoard,EarlyStopping,ModelCheckpoint
+from keras.regularizers import l1_l2
 from keras import Model
 from numpy import random
 from backone_language_model import language_model
 from backone_optimize import optimize_funcation
+import numpy as np
 
 class core_model(object):
 
@@ -27,6 +29,7 @@ class core_model(object):
         )
         self.optimize_fun=optimize_funcation()
 
+    #node2vec dfs,dps控制器
     def unnormalized_transition_probability(self,t,v,p,q):
         '''
         :param v:目前所在顶点
@@ -80,10 +83,8 @@ class core_model(object):
         self.alias_nodes=alias_nodes
         self.alias_edges=alias_edges
 
-        import numpy as np
-        np.save('walk_edges',alias_edges)
 
-
+    #deepwalk,node2vec core
     def random_walk(self,start_vertex,is_edge_sampling=False):
         node_sentence=[start_vertex]
         now_walk_len=1
@@ -112,6 +113,7 @@ class core_model(object):
 
         return node_sentence
 
+    #line_core
     def line_loss(self,y_true,y_pred):
         #在二阶有负样本,因为引入了-1的权重,故loss共用
         return -K.mean(K.log(K.sigmoid(y_true*y_pred)))
@@ -151,6 +153,52 @@ class core_model(object):
 
         return model
 
+    #sdne
+    def first_nd(self, alpha):
+        def first_loss(y_true, y_pred):
+            loss = 2 * alpha * tf.linalg.trace(tf.matmul(tf.matmul(y_pred, y_true, transpose_a=True), y_pred))
+            return loss / tf.to_float(K.shape(y_pred)[0])
+
+        return first_loss
+
+    def second_nd(self, beta):
+        def second_loss(y_true, y_pred):
+            b_ = np.ones_like(y_true)
+            b_[y_true != 0] = beta
+            loss = K.sum(K.square((y_true - y_pred) * b_), axis=-1)
+            return K.mean(loss)
+
+        return second_loss
+
+    def encoder(self, x, hidden_size_list, l1, l2):
+        for i in range(len(hidden_size_list) - 1):
+            x = Dense(units=hidden_size_list[i], activation='relu', kernel_regularizer=l1_l2(l1, l2))(x)
+        y = Dense(units=hidden_size_list[-1], activation='relu', kernel_regularizer=l1_l2(l1, l2), name='encode')(x)
+
+        return y
+
+    def decoder(self, y, hidden_size_list, l1, l2):
+        for i in reversed(range(len(hidden_size_list) - 1)):
+            y = Dense(units=hidden_size_list[i], activation='relu', kernel_regularizer=l1_l2(l1, l2))(y)
+        x = Dense(units=self.numNodes, activation='relu', name='decode')(y)
+
+        return x
+
+    def creat_model(self, hidden_size_list, l1, l2):
+        adjacency_matrix = Input(shape=(self.numNodes,))
+        L = Input(shape=(None,))
+        x = adjacency_matrix
+
+        y = self.encoder(x, hidden_size_list, l1, l2)
+        x_ = self.decoder(y, hidden_size_list, l1, l2)
+
+        model = Model(inputs=[adjacency_matrix, L], outputs=[x_, y])
+        emb = Model(inputs=adjacency_matrix, outputs=y)
+
+        return model,emb
+
+
+    #callback
     def model_prepare(self,log_dir):
         tensorboard=TensorBoard(log_dir=log_dir)
 
@@ -177,6 +225,7 @@ class core_model(object):
         callback_list=[tensorboard,checkpoint,earlystop,reduce_lr]
         return callback_list
 
+    #language model(netivate_skig_model)
     def embdding_train(self,sentence_list):
 
         print('begin train embedding')
