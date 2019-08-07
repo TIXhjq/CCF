@@ -70,7 +70,7 @@ class sdne(core_model):
                 np.random.shuffle(all_nodes)
 
     def train(self):
-        self.model.compile('adam',[self.second_nd(self.beta),self.first_nd(self.alpha)])
+        # self.model.compile('adam',[self.second_nd(self.beta),self.first_nd(self.alpha)])
         self.model.fit_generator(
             self.generator_data(),
             steps_per_epoch=self.numNodes//self.batch_size,
